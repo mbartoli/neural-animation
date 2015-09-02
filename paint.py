@@ -6,6 +6,7 @@ import subprocess
 import sys
 import os
 import errno
+import time
 
 
 def make_sure_path_exists(path):
@@ -19,7 +20,7 @@ def make_sure_path_exists(path):
         if exception.errno != errno.EEXIST:
             raise
 
-def main(input, output, style):
+def main(input, output, style, start_frame, end_frame):
     make_sure_path_exists(input)
     make_sure_path_exists(output)
 
@@ -37,20 +38,21 @@ def main(input, output, style):
     else:
 	nrframes = nrframes+1
 
+    now = time.time()
+    totaltime = 0
+
     for i in xrange(frame_i, nrframes):
         print('Processing frame #{}').format(frame_i)
 
-	os.system("th neural_style.lua -num_iterations 2000 -style_image " + style + " -content_image " + input + "/%08d.jpg" % frame_i + " -print_iter 2000 -ouput_image " + output + "/08d.jpg" % frame_i)	
+	os.system("th neural_style.lua -num_iterations 2000 -style_image " + style + " -content_image " + input + "/%08d.jpg" % frame_i + " -print_iter 2000 -output_image " + output + "/%08d.jpg" % frame_i)	
 	
-        #saveframe = output + "/%08d.%s" % (frame_i, image_type)
-
    	later = time.time()
    	difference = int(later - now)
 	totaltime += difference
 	avgtime = (totaltime / i)
 
 	print '***************************************'
-	print 'Saving Image As: ' + saveframe
+	print 'Saving Image As: ' + output +"/%08d.jpg" % frame_i
 	print 'Frame ' + str(i) + ' of ' + str(nrframes-1)
 	print 'Frame Time: ' + str(difference) + 's'
 	timeleft = avgtime * ((nrframes-1) - frame_i)        
@@ -77,7 +79,17 @@ if __name__ == "__main__":
 	'-s','--style',
 	help='Image to base the style after',
 	required=True)
+    parser.add_argument(
+    	'-sf', '--start_frame',
+        type=int,
+    	required=False,
+    	help="starting frame nr")
+    parser.add_argument(
+    	'-ef', '--end_frame',
+        type=int,
+    	required=False,
+    	help="end frame nr")
 
     args = parser.parse_args()
 
-    main(args.input, args.output, args.style)
+    main(args.input, args.output, args.style, args.start_frame, args.end_frame)
