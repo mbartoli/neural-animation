@@ -19,7 +19,7 @@ def make_sure_path_exists(path):
         if exception.errno != errno.EEXIST:
             raise
 
-def main(input, output, image_type, style):
+def main(input, output, style):
     make_sure_path_exists(input)
     make_sure_path_exists(output)
 
@@ -37,26 +37,27 @@ def main(input, output, image_type, style):
     else:
 	nrframes = nrframes+1
 
+    for i in xrange(frame_i, nrframes):
+        print('Processing frame #{}').format(frame_i)
 
+	os.system("th neural_style.lua -style_image " + style + " -content_image " + input + "/%08d.jpg" % frame_i)	
+	
+        saveframe = output + "/%08d.%s" % (frame_i, image_type)
 
-    saveframe = output + "/%08d.%s" % (frame_i, image_type)
+   	later = time.time()
+   	difference = int(later - now)
+	totaltime += difference
+	avgtime = (totaltime / i)
 
-
-    # stats
-    later = time.time()
-    difference = int(later - now)
-    totaltime += difference
-    avgtime = (totaltime / i)
-
-    print '***************************************'
-    print 'Saving Image As: ' + saveframe
-    print 'Frame ' + str(i) + ' of ' + str(nrframes-1)
-    print 'Frame Time: ' + str(difference) + 's'
-    timeleft = avgtime * ((nrframes-1) - frame_i)        
-    m, s = divmod(timeleft, 60)
-    h, m = divmod(m, 60)
-    print 'Estimated Total Time Remaining: ' + str(timeleft) + 's (' + "%d:%02d:%02d" % (h, m, s) + ')'
-    print '***************************************'
+	print '***************************************'
+	print 'Saving Image As: ' + saveframe
+	print 'Frame ' + str(i) + ' of ' + str(nrframes-1)
+	print 'Frame Time: ' + str(difference) + 's'
+	timeleft = avgtime * ((nrframes-1) - frame_i)        
+	m, s = divmod(timeleft, 60)
+	h, m = divmod(m, 60)
+	print 'Estimated Total Time Remaining: ' + str(timeleft) + 's (' + "%d:%02d:%02d" % (h, m, s) + ')'
+	print '***************************************'
 
 
 
@@ -73,14 +74,10 @@ if __name__ == "__main__":
         help='Output directory where processed frames are to be stored',
         required=True)
     parser.add_argument(
-        '-it','--image_type',
-        help='Specify whether jpg or png',
-        required=True)
-    parser.add_argument(
 	'-s','--style',
 	help='Image to base the style after',
 	required=True)
 
     args = parser.parse_args()
 
-    main(args.input, args.output, args.image_type, args.style)
+    main(args.input, args.output, args.style)
