@@ -1,7 +1,7 @@
 #!/bin/bash
 if [ $# -ne 4 ]; then
     echo "please provide the directory of the processed frames"
-    echo "./3_frames2movie.sh [ffmpeg|avconv|mplayer] [frames_directory] [original_video_with_sound] [png|jpg]"
+    echo "./frames2movie.sh [ffmpeg|avconv|mplayer] [frames_directory] [original_video_with_sound] [png|jpg]"
     exit 1
 fi
 

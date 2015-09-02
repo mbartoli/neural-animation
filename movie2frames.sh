@@ -1,7 +1,7 @@
 #!/bin/bash
 if [ $# -ne 4 ]; then
     echo "please provide the moviename and directory where to store the frames"
-    echo "./1_movie2frames [ffmpeg|avconv|mplayer] [movie.mp4] [directory] [png|jpg]"
+    echo "./movie2frames [ffmpeg|avconv|mplayer] [movie.mp4] [directory] [png|jpg]"
     exit 1
 fi
 
