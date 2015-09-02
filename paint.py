@@ -40,9 +40,9 @@ def main(input, output, style):
     for i in xrange(frame_i, nrframes):
         print('Processing frame #{}').format(frame_i)
 
-	os.system("th neural_style.lua -style_image " + style + " -content_image " + input + "/%08d.jpg" % frame_i)	
+	os.system("th neural_style.lua -num_iterations 2000 -style_image " + style + " -content_image " + input + "/%08d.jpg" % frame_i + " -print_iter 2000 -ouput_image " + output + "/08d.jpg" % frame_i)	
 	
-        saveframe = output + "/%08d.%s" % (frame_i, image_type)
+        #saveframe = output + "/%08d.%s" % (frame_i, image_type)
 
    	later = time.time()
    	difference = int(later - now)
