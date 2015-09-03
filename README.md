@@ -1,7 +1,5 @@
 # neural-animation
-Implementing neural art on video 
-
-This project allows you to transform video based on *A Neural Algorithm of Artistic Style* by Leon A. Gatys, Alexander S. Ecker, and Matthias Bethge using a recent Torch implemenation. 
+Implementing neural art on video. Transform video in the artistic style of Van Gogh, Munch, or any other image using CNNs based on *A Neural Algorithm of Artistic Style* by Leon A. Gatys, Alexander S. Ecker, and Matthias Bethge using a recent Torch implemenation. 
 
 ## Example
 Given an image of Edvard Munch's *The Scream*
