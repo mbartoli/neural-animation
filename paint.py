@@ -61,8 +61,8 @@ def main(input, output, style, start_frame, end_frame):
 	print 'Estimated Total Time Remaining: ' + str(timeleft) + 's (' + "%d:%02d:%02d" % (h, m, s) + ')'
 	print '***************************************'
 
-
-
+        now = time.time()
+        frame_i += 1
 
 
 if __name__ == "__main__":
