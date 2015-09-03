@@ -24,9 +24,10 @@ We can generate that same clip from *2001: A Space Odyssey* in the artistic styl
 ```
 python paint.py -i [directory_of_original_frames] -o [directory_of_processed_frames] -s [style_image]
 ```
-Optional parameters ```sf``` and ```ef``` of start and end frames to 'paint' on. 
+Optional parameters ```-sf``` and ```-ef``` for start and end frames to 'paint' on. 
 
 ### Generate mp4 or gif from processed frames
+With the correct parameters, run frames2gif.sh or frames2movie.sh, or upload to imageflip. 
 
 ## Setup 
 Dependencies:
