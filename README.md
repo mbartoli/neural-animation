@@ -14,9 +14,30 @@ and a clip from *2001: A Space Odyssey*
 We can generate that same clip from *2001: A Space Odyssey* in the artistic style of Edvard Munch's *The Scream*
 <img src="https://i.imgflip.com/qhkd7.gif">     
 
-## Performance
+## Use
+### Generate frames from mp4   
+```
+./movie2frames.sh ffmpeg [source_video] [directory_of_original_frames] jpg
+```   
+
+### Paint a new video
+```
+python paint.py -i [directory_of_original_frames] -o [directory_of_processed_frames] -s [style_image]
+```
+Optional parameters ```sf``` and ```ef``` of start and end frames to 'paint' on. 
+
+### Generate mp4 or gif from processed frames
 
 ## Setup 
+Dependencies:
+* torch7
+* loadcaffe
+* cutorch
+* CUDA 6.5+
+* cudnn.torch
+* ffmpeg
+
+
 
 #### Acknowledgments
 Thanks jcjohnson for providing the Lua/Torch implementation and graphix for frame manipulation. 
